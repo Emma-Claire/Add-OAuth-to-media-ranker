@@ -15,7 +15,8 @@ class SessionsController < ApplicationController
       user = User.from_github(auth_hash)
       if user.save
         session[:user_id] = user.id
-        flash[:message] = "Successfully logged in as a new user #{user.username}"
+        flash[:status] = :success
+        flash[:result_text] = "Successfully logged in as a new user #{user.username}"
 
 
       else
@@ -28,7 +29,8 @@ class SessionsController < ApplicationController
     else
       #welcome back
       session[:user_id] = user.id
-      flash[:message] = "Welcome back, #{user.username}"
+      flash[:status] = :success
+      flash[:result_text] = "Welcome back, #{user.username}"
     end
 
     redirect_to root_path
